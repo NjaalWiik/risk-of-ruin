@@ -13,9 +13,15 @@
 
 <body>
     <div class="container">
+        <div id="help-icon" class="help-icon">
+            <span>?</span>
+        </div>
         <div class="stats">
             <!-- Added balance and timer display -->
-            <p id="balance-display">Balance: $25</p>
+            <div class="text-container">
+                <p id="balance-display">Balance: $</p>
+                <p id="balanceNbr">25</p>
+            </div>
             <p id="timer-display">Timer: 10:00</p>
             <p id="heads-count">Heads: 0</p>
             <p id="tails-count">Tails: 0</p>
@@ -46,6 +52,31 @@
                 <button id="resetFromWin">Reset Game</button>
                 <button class="primary" id="seeStats">See Stats</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="rules-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal" class="close">&times;</span>
+            <h2>Game Rules</h2>
+            <ul>
+                <li><strong>Initial Stake:</strong> Players start with $25.</li>
+                <li><strong>Coin Bias:</strong> The coin is weighted - 60%
+                    heads, 40% tails.
+                </li>
+                <li><strong>Betting:</strong> Players bet any portion of their
+                    bankroll.
+                </li>
+                <li><strong>Winning (heads):</strong> doubles the bet amount.
+                </li>
+                <li><strong>Losing (tails):</strong> loses the bet amount.</li>
+                <li><strong>Transparency:</strong> All players are informed
+                    about the coin’s
+                    bias.</li>
+                <li><strong>Duration:</strong> The game lasts 10 minutes.</li>
+                <li><strong>Maximum Payout:</strong> Capped at $250.</li>
+            </ul>
         </div>
     </div>
 

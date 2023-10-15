@@ -16,7 +16,7 @@ let isGameActive = false;
 const updateStats = () => {
     document.querySelector("#heads-count").textContent = `Heads: ${heads}`;
     document.querySelector("#tails-count").textContent = `Tails: ${tails}`;
-    document.querySelector("#balance-display").textContent = `Balance: $${balance}`;
+    document.querySelector("#balanceNbr").textContent = `${balance}`;
     document.querySelector("#timer-display").textContent = `Timer: ${Math.floor(timeLeft / 60)}:${(timeLeft % 60).toString().padStart(2, "0")}`;
 };
 
@@ -41,22 +41,22 @@ flipBtn.addEventListener("click", () => {
 
     if (isHeads) {
         setTimeout(() => { coin.style.animation = "spin-heads 3s forwards"; }, 100);
-        // Move balance changes and count update to be after the animation completes.
         setTimeout(() => {
             heads++;
+            // Using runCounter to animate balance update
+            runCounter(document.querySelector("#balanceNbr"), balance, balance + betAmount, 500);
             balance += betAmount;
             updateStats();
-            // Re-enable flip button after spin and updates complete.
             flipBtn.disabled = false;
         }, 3000);
     } else {
         setTimeout(() => { coin.style.animation = "spin-tails 3s forwards"; }, 100);
-        // Move balance changes and count update to be after the animation completes.
         setTimeout(() => {
             tails++;
+            // Using runCounter to animate balance update
+            runCounter(document.querySelector("#balanceNbr"), balance, balance - betAmount, 500);
             balance -= betAmount;
             updateStats();
-            // Re-enable flip button after spin and updates complete.
             flipBtn.disabled = false;
         }, 3000);
     }
@@ -168,3 +168,105 @@ function resetGame() {
     isGameActive = false;
     clearInterval(gameTimer); // Ensure the previous timer is cleared
 }
+
+function runCounter(target, start, end, duration) {
+    const numberRegex = /^(\D?)([\d.,\s]+)(\D?)$/;
+
+    let startMatch = String(start).match(numberRegex);
+    let endMatch = String(end).match(numberRegex);
+
+    if (!startMatch || !endMatch) {
+        console.error("Invalid start or end value. Must be a number or a string with at most one non-number character at the start or end.");
+        return;
+    }
+
+    let [_, , startNum,] = startMatch;
+    let [__, endPrefix, endNum, endSuffix] = endMatch;
+
+    const useComma = endNum.includes(",");
+    const useSpace = endNum.includes(" ");
+
+    startNum = parseFloat(startNum.replace(/[,\s]/g, ''));
+    endNum = parseFloat(endNum.replace(/[,\s]/g, ''));
+
+    if (isNaN(startNum) || isNaN(endNum)) {
+        console.error("Invalid numerical part in start or end value.");
+        return;
+    }
+
+    const decimalPlaces = (endNum.toString().split('.')[1] || []).length;
+
+    let startTime = performance.now();
+    let range = endNum - startNum;
+
+    function easeOutCubic(t) {
+        return (--t) * t * t + 1;
+    }
+
+    function formatNumber(number) {
+        let formattedNumber = number.toFixed(decimalPlaces);
+        if (useComma) {
+            return formattedNumber.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        } else if (useSpace) {
+            return formattedNumber.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        } else {
+            return formattedNumber;
+        }
+    }
+
+    function render() {
+        let nowTime = performance.now();
+        let progress = Math.min((nowTime - startTime) / duration, 1);
+        let easing = easeOutCubic(progress);
+        let currentValue = startNum + (range * easing);
+
+        target.innerHTML = endPrefix + formatNumber(currentValue) + endSuffix;
+
+        if (progress < 1) {
+            requestAnimationFrame(render);
+        } else {
+            target.innerHTML = endPrefix + formatNumber(endNum) + endSuffix;
+        }
+    }
+
+    requestAnimationFrame(render);
+}
+
+document.getElementById('help-icon').addEventListener('click', () => {
+    document.getElementById('rules-modal').style.display = 'flex';
+});
+
+document.getElementById('close-modal').addEventListener('click', () => {
+    document.getElementById('rules-modal').style.display = 'none';
+});
+
+window.addEventListener('click', (event) => {
+    if (event.target === document.getElementById('rules-modal')) {
+        document.getElementById('rules-modal').style.display = 'none';
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    var modal = document.getElementById('myModal');
+    var modalContent = document.getElementsByClassName('modal-content')[0];
+
+    // Close modal if 'Esc' key is pressed
+    window.addEventListener('keydown', function (event) {
+        if (event.key === "Escape") {
+            closeModal();
+        }
+    });
+
+    // Close modal if click is outside of modalContent
+    window.addEventListener('click', function (event) {
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
+
+    function closeModal() {
+        modal.style.display = "none";
+    }
+
+    // ... Rest of your JavaScript code for opening the modal, etc.
+});

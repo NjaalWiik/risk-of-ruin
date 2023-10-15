@@ -2,7 +2,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Rubik", sans-serif;
+  font-family: 'Rubik', sans-serif;
 }
 body {
   height: 100%;
@@ -11,7 +11,7 @@ body {
 .container {
   background-color: #ffffff;
   width: 400px;
-  padding: 50px;
+  padding: 32px;
   position: absolute;
   transform: translate(-50%, -50%);
   top: 50%;
@@ -130,6 +130,39 @@ button {
   text-align: center;
 }
 
+.text-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 .button_container {
   margin-top: 1rem;
+}
+
+.help-icon {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  width: 30px;
+  height: 30px;
+  background-color: #eee;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.help-icon:hover {
+  background-color: #ddd;
+}
+
+ul,
+ol {
+  text-align: left;
+  list-style-position: inside;
+  padding-left: 0;
 }
