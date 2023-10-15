@@ -236,7 +236,7 @@ document.getElementById('help-icon').addEventListener('click', () => {
     document.getElementById('rules-modal').style.display = 'flex';
 });
 
-document.getElementById('close-modal').addEventListener('click', () => {
+document.getElementById('rules-modal').addEventListener('click', () => {
     document.getElementById('rules-modal').style.display = 'none';
 });
 
@@ -247,7 +247,7 @@ window.addEventListener('click', (event) => {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-    var modal = document.getElementById('myModal');
+    var modal = document.getElementById('rules-modal');
     var modalContent = document.getElementsByClassName('modal-content')[0];
 
     // Close modal if 'Esc' key is pressed

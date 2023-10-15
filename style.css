@@ -166,3 +166,7 @@ ol {
   list-style-position: inside;
   padding-left: 0;
 }
+
+.close {
+  display: none;
+}
