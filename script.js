@@ -5,7 +5,7 @@ let flipBtn = document.querySelector("#flip-button");
 let resetBtn = document.querySelector("#reset-button");
 let startBtn = document.querySelector("#start-button");
 
-let balance = 1;
+let balance = 25;
 let timeLeft = 10 * 60; // 10 minutes in seconds
 let gameTimer;
 let isGameActive = false;
