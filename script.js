@@ -68,6 +68,11 @@ function startGame() {
         clearInterval(gameTimer);
     }
 
+    // Ensure there's no pre-existing interval running
+    if (gameTimer) {
+        clearInterval(gameTimer);
+    }
+
     // Set a recurring interval that updates every second (1000ms)
     gameTimer = setInterval(() => {
 
@@ -158,8 +163,8 @@ function resetGame() {
     heads = 0;
     tails = 0;
     balance = 25;
-    timeLeft = 10 * 60;  // Resetting the timer to 10 minutes
+    timeLeft = 10 * 60;
     updateStats();
-    isGameActive = false;  // Ensure the game is not marked as active
-    // You may add more reset logic if needed
+    isGameActive = false;
+    clearInterval(gameTimer); // Ensure the previous timer is cleared
 }
