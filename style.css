@@ -177,4 +177,9 @@ ol {
     width: 90%;
     /* additional mobile styles */
   }
+
+  .modal {
+    width: 90%;
+    /* additional mobile styles */
+  }
 }
