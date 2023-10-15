@@ -1,0 +1,58 @@
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk of ruin</title>
+    <!--Google Fonts-->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap"
+        rel="stylesheet">
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="stats">
+            <!-- Added balance and timer display -->
+            <p id="balance-display">Balance: $25</p>
+            <p id="timer-display">Timer: 10:00</p>
+            <p id="heads-count">Heads: 0</p>
+            <p id="tails-count">Tails: 0</p>
+        </div>
+
+        <div class="coin" id="coin">
+            <div class="heads">
+                <img src="./coin_heads.png">
+            </div>
+            <div class="tails">
+                <img src="./coin_tails.png">
+            </div>
+        </div>
+        <div class="buttons">
+            <!-- Added Start Game button and Bet input -->
+            <input type="number" id="bet-input" placeholder="Bet ($)" />
+            <button id="flip-button">Flip Coin</button>
+            <button id="reset-button">Reset</button>
+        </div>
+    </div>
+
+    <!-- Winning Modal -->
+    <div id="winningModal" class="modal">
+        <div class="modal-content">
+            <h2>Congratulations!</h2>
+            <p>You reached the maximum payout of $250. 🎉</p>
+            <div class="button_container">
+                <button id="resetFromWin">Reset Game</button>
+                <button class="primary" id="seeStats">See Stats</button>
+            </div>
+        </div>
+    </div>
+
+    <!--Script-->
+    <script src="script.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/tsparticles-confetti@2.12.0/tsparticles.confetti.bundle.min.js"></script>
+</body>
+
+</html>
